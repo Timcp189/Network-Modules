@@ -8,10 +8,11 @@ import numpy as np
 device = 'cuda'
 test_dataset = ConfAndISM(csv_file='test_dataset.csv', root_dir='Test Images', transform=transforms.ToTensor())
 
-Unet1 = unet(1, 1, 5, 1, 1).to(device)
+Unet1 = unet(1, 1, 5, 1, 1).to(device) #make an instance of the network
 
-epoch=[1,2,5,10,25,50,100,200,400,1000]
+epoch=[1,2,5,10,25,50,100,200,400,1000] #epoch values to load the network
 
+#for loop to load the network and test a single image to return as the prediction
 for i in epoch:
     Unet1.load_state_dict(torch.load(f'trained_unet_at epoch_{i} (lr=0.0001, bs=1, ks=3).pt'))
 
